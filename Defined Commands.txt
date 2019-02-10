@@ -1,0 +1,31 @@
+TEXT ADVENTURE DEFINED COMMANDS
+
+help *args: lists all commands, if args present displays doc string of command
+
+take *args: pick up item(s) in current location
+
+drop *args: takes item(s) from player.inventory and adds to location.items
+
+use *args: makes use of items in player.inventory
+
+speak *args: displays npcs speach
+
+talk *args: displays npc speach
+
+search: displays all items in current location
+
+north: moves location north
+
+south: moves location south
+
+east: moves location east
+
+west: moves location west
+
+bag: displays items in player inventory
+
+stats: displays player stats #currently only coins is defined
+
+describe: describes current location
+
+quit: exits game, option to save player.

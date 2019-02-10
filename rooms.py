@@ -1,6 +1,6 @@
 #location module for adventure.py
 import json
-import npc
+import characters as char
 import os
 
 
@@ -22,8 +22,8 @@ def get_loc(id): #read location from file
         return room
 def save_room(room):
     save = json.dumps(room)
-    if not os.path.isdir('adventure/visited'):
-        os.makedirs('adventure/visited')
+    if not os.path.isdir('visited'):
+        os.makedirs('visited')
     file = open('visited/room' + str(room['id']) +'.json','w')
     file.write(save)
     file.close()
@@ -45,7 +45,19 @@ class Location():
         self.west = room['west']
         self.npc = room['npc']
 
-                 
+        self.init_NPC()
+        
+    def init_NPC(self):
+        """Initialize NPCS"""
+        for i in range(0, len(self.npc)):
+            #A little confusing with all the npc
+            self.npc[i] = char.NPC(char.get_npc(self.npc[i]))
+            
+
+    def npc2string(self):
+        """Change npc back to string for json serialization."""
+        for i in range(0, len(self.npc)):
+            self.npc[i] = self.npc[i].name
             
 
     def describe(self):
@@ -54,6 +66,9 @@ class Location():
 
     def move(self, d):
         """move player in a direction."""
+        #copy npc back to string of name
+        self.npc2string()
+        
         save_room(self.__dict__) #write current modified room dict to file
                         #then rerun own init method to change room data 
         if d == 'n':

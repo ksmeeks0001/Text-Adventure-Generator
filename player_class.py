@@ -26,7 +26,6 @@ def load_player():
                 f = file.read()
                 player = json.loads(f)
                 file.close()
-                done = True
                 return player
                 
             except:

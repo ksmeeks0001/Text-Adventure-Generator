@@ -1,13 +1,11 @@
 #GUI for adventure game
 from tkinter import*
-from PIL import Image
 class Gui():
     """Gui shows player stats for adventure game."""
 
     def __init__(self):
         #initialize
         self.root = Tk()
-        back = Image.open('sword.jpg')
         self.root.configure(background = 'red')
         self.root.title('ADVENTURE')
         #frames
