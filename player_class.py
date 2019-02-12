@@ -7,18 +7,27 @@ import os
 
 def set_player_name():
         """gets and sets the players name."""
-        done = 'n'
-        while done == 'n':
+        redo = 0
+        while True:
+            redo += 1
+            if redo > 6:
+                print("Are you having trouble?")
+                redo = 0
             name = input("What is your name, Traveler? ")
-            prompt = "You entered "+name+" is this correct? (y/n) "
-            done = input(prompt)             
-            if done == 'y':
-                return name
+            if name:
+                prompt = "You entered "+name+" is this correct? (y/n) "
+                correct = input(prompt)
+                if correct.lower() == 'y':
+                        return name
+                else:
+                        continue
+                
+                
 def load_player():
     """load saved player if available"""
     
     done = False    
-    while done == False:
+    while not done:
         load = input('Continue saved game? (y/n) ')
         if load == 'y':           
             try:
@@ -30,9 +39,7 @@ def load_player():
                 
             except:
                 print('No saved game found.')
-                continue
-                    
-            
+                continue   
             
         else: #start a new character
             file = open('players/new.json')

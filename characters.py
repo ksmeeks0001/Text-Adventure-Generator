@@ -2,7 +2,7 @@
 import json
 
 def get_npc(name): #read npc info from file 
-    file = open(name +'.json')
+    file = open('characters/'+name +'.json')
     f = file.read()
     npc = json.loads(f)
     return npc
