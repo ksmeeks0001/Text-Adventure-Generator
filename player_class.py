@@ -2,8 +2,8 @@
 import json
 import rooms
 import os
-
-
+from items import*
+import pickle
 
 def set_player_name():
         """gets and sets the players name."""
@@ -46,19 +46,18 @@ def load_player():
             f = file.read()
             player = json.loads(f)
             file.close()
-            player['name'] = set_player_name()
-            x = 0    
+            player['name'] = set_player_name()   
             for i in range(1,5):
-                x += 1
-                room = 'room' + str(x) +'.json'
+                room = 'room' + str(i) +'.json'
                 if os.path.isfile('visited/' + room):
                     os.remove('visited/' + room)
             done = True
             return player 
     
 
-def save_player(player, id):
+def save_player(player, id, itemkeys):
     player['location'] = id
+    player['inventory'] = itemkeys
     save = json.dumps(player)
     file = open('players/player.json','w')
     file.write(save)
@@ -76,8 +75,23 @@ class Player():
        self.location = rooms.Location(rooms.get_loc(info['location']))    
        self.inventory = info['inventory']
        self.coins = info['coins']
+       self.init_item_data()
+
+    def init_item_data(self):
+        """Get Item data from pickle file."""
+        items = dict()
+        for i in self.inventory:
+            with open(i+'.pickle', 'rb') as file:
+                items[i] = pickle.load(file)
+        self.inventory = items
+        
+    def new_item_data(self, item):
+        """Get Item data after picking it up."""
+        with open(item+'.pickle','rb') as file:
+            self.inventory[item] = pickle.load(file)
 
 
+#tests
 if __name__ == "__main__":
     character = Player(load_player())
     print(character.location)

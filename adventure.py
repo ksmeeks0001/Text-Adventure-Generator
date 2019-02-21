@@ -13,27 +13,29 @@ intro +='search of glory and honor.'
 
 class Game(cmd.Cmd):
     def __init__(self, player):
-       cmd.Cmd.__init__(self) #initialize the command prompt
-           
+
+       cmd.Cmd.__init__(self) #initialize the command prompt    
        self.player = player 
        self.prompt = self.player.name.title() + ': '
-
        self.doc_header = "Player Commands      Type 'help <command>' for details'"
        self.ruler = '*'
        
-        #counts for messages
+       #counts for messages
        self.empty_call = 0
        self.invalids = 0
        #move counter
        self.moves = 0
+
     #define cmd functionality
     def preloop(self):
         print('\n' * 100)
         self.player.location.describe() #describe location on boot
+
     def precmd(self, line):
         print('\n' * 5)
         self.moves += 1
         return line.lower()
+
     def emptyline(self):
         """Redefine cmd.Cmd to do nothing on empty line input."""
         if self.empty_call <= 5:
@@ -44,6 +46,7 @@ class Game(cmd.Cmd):
         else:
             self.empty_call = 0
             self.do_help('')
+
     def default(self, line):
         """Redefine default message for non valid command."""
         self.invalids += 1
@@ -56,6 +59,7 @@ class Game(cmd.Cmd):
             if (reply.lower() == 'y') or (reply.lower() == 'yes'):
                 self.do_help('');
             self.invalids = 0
+
     #argument parser
     def parse(self, args):
         if ',' in args:
@@ -68,56 +72,55 @@ class Game(cmd.Cmd):
             for i in range(0,len(args)):
                 args[i] = args[i].strip()
             return args
+
     #actions
-    def do_take(self, args):
+    def do_take(self, arg):
         """Take an item and put it in inventory."""
-        args = self.parse(args)
-        for arg in args:
-            #check for 'take all' if there are items in location
-            if arg == 'all' and len(self.player.location.items) != 0:
-                self.player.inventory += self.player.location.items
-                for i in self.player.location.items:
-                    print(i, 'added to inventory.')
-                del self.player.location.items[:]
-            #if 'take all' and there is nothing there
-            elif arg == 'all' and len(self.player.location.items) == 0:
-                print('Nothing to take here.')
-                #taking a specific item if in location
-            elif arg in self.player.location.items:
-                pop = self.player.location.items.index(arg)
-                item = self.player.location.items.pop(pop)
-                self.player.inventory.append(item)
-                print(item, 'added to inventory.')
-            elif arg == '':
-                print('What do you want to take?')
-            else:
-                print('There is no' , arg , 'to take.')
-    def do_drop(self, args):
+    
+        #check for 'take all' if there are items in location
+        if arg == 'all' and len(self.player.location.items) != 0:
+            self.player.inventory += self.player.location.items
+            for i in self.player.location.items:
+                print(i, 'added to inventory.')
+            del self.player.location.items[:]
+        #if 'take all' and there is nothing there
+        elif arg == 'all' and len(self.player.location.items) == 0:
+            print('Nothing to take here.')
+        #taking a specific item if in location
+        elif arg in self.player.location.items:
+            pop = self.player.location.items.index(arg)
+            item = self.player.location.items.pop(pop)
+            self.player.new_item_data(item)
+            print(item, 'added to inventory.')
+        elif arg == '':
+            print('What do you want to take?')
+        else:
+            print('There is no' , arg , 'to take.')
+
+    def do_drop(self, arg):
         """Drop an item out of inventory."""
-        args = self.parse(args)
-        for arg in args:
-            if arg in self.player.inventory:
-                pop = self.player.inventory.index(arg)
-                i = self.player.inventory.pop(pop) #remove item from inventory
-                self.player.location.items.append(i)#drop into your location
-                print('-' + arg + ' dropped')
-            else:
-                print('You don\'t have a ' , arg)
-    def do_use(self, args):
+        if arg in self.player.inventory.keys():
+            self.player.location.items.append(arg)#drop into your location
+            del self.player.inventory[arg]
+            print('-' + arg + ' dropped')
+        else:
+            print('You don\'t have a ' , arg)
+
+    def do_use(self, arg):
         """Use an item in your inventory."""
-        args = self.parse(args)
-        for arg in args:
-            if arg in self.player.inventory:
-                useable =items.use_it(arg) #use item accordingly
-                if useable == True:
-                    pass
-                else: #if useable is false means it is destroyed
-                    self.player.inventory.remove(arg)
-            else:
-                print('You don\'t have a ' , arg)
+        if arg == '':
+            print("What do you want to use?")
+        elif arg in self.player.inventory.keys():
+            self.player.inventory[arg].use(self.player)
+            if not self.player.inventory[arg].reusable:
+                del self.player.inventory[arg]
+        else:
+            print('You don\'t have a ' , arg)
+
     def do_speak(self, arg):
         """speak to a character"""
         self.speak(arg)
+
     def do_talk(self, arg):
         """speak to a character"""
         self.speak(arg)
@@ -143,18 +146,21 @@ class Game(cmd.Cmd):
             self.player.location.move('n')
         else:
             print('You can not move north')
+
     def do_south(self, *args):
         """Move character location south."""
         if self.player.location.south != None:
             self.player.location.move('s')
         else:
             print('You can not move south')
+
     def do_east(self, *args):
         """Move character location east."""
         if self.player.location.east != None:
             self.player.location.move('e')
         else:
             print('You can not move east')
+
     def do_west(self, *args):
         """Move character location west."""
         if self.player.location.west != None:
@@ -175,6 +181,7 @@ class Game(cmd.Cmd):
         """Show player stats"""
         print('health - ' ,'equiped - ' , 'attack - ' ,
               'coins - ' + str(self.player.coins) , sep='\n')
+
     def do_describe(self, arg):
         """Describes a person, place or thing."""
         #no arg describe location
@@ -197,12 +204,15 @@ class Game(cmd.Cmd):
             if done == 'y':
                 self.player.location.npc2string()
                 save_room(self.player.location.__dict__)
-                save_player(self.player.__dict__, self.player.location.id)                
+                save_player(self.player.__dict__,
+                            self.player.location.id,
+                            list(self.player.inventory.keys()))                
                 print('Game has been saved!\nThanks for playing!')
                 return True
             elif done == 'n':
                 break
-    #functions called be do_* methods
+
+    #functions called by do_* methods
     def speak(self, arg):
         """Called by speak and talk"""
         if arg == "":

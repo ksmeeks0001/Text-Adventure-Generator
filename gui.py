@@ -1,31 +1,47 @@
 #GUI for adventure game
 from tkinter import*
-class Gui():
-    """Gui shows player stats for adventure game."""
+
+class Interface():
+    """User Interface for creating a text adventure."""
 
     def __init__(self):
-        #initialize
+
         self.root = Tk()
-        self.root.configure(background = 'red')
-        self.root.title('ADVENTURE')
-        #frames
-        self.left = Frame(self.root)
-        self.left.configure(background = 'red')
-        self.right = Frame(self.root)
+        self.root.title('Text Adventure Engine'+'\n' * 12)
+        self.root.geometry("500x500")
+        #Main Frame
+        self.mainframe = Frame(self.root)
+        self.header = Label(self.mainframe,
+                            text="TEXT ADVENTURE ENGINE",
+                            font = "CASTELLAR" )
 
-        #left side labels
-        self.health = Label(self.left, text= 'Health',
-                            background = 'red')
-        self.equiped = Label(self.left, text = 'Equiped',
-                             background = 'red')
-        self.inventory = Label(self.left, text = 'Inventory',
-                               background = 'red')
+        self.location_button = Button(self.mainframe,
+                                      text="Create Location",
+                                      font="Elephant",
+                                      command = self.make_location)
+        
 
-        #pack left
-        self.health.pack()
-        self.equiped.pack()
-        self.inventory.pack()
-        self.left.pack(side = LEFT)
+        #pack Main Frame
+        self.mainframe.pack()
+        self.header.pack()
+        self.location_button.pack(side='bottom')
+
+
+
+
+
+    def make_location(self):
+        pass
+
+
+
+
+
+
+
+        
+        
 
         self.root.mainloop()
-gui = Gui()
+
+gui = Interface()
