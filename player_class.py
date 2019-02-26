@@ -81,13 +81,13 @@ class Player():
         """Get Item data from pickle file."""
         items = dict()
         for i in self.inventory:
-            with open(i+'.pickle', 'rb') as file:
+            with open('items/'+i+'.pickle', 'rb') as file:
                 items[i] = pickle.load(file)
         self.inventory = items
         
     def new_item_data(self, item):
         """Get Item data after picking it up."""
-        with open(item+'.pickle','rb') as file:
+        with open('items/'+item+'.pickle','rb') as file:
             self.inventory[item] = pickle.load(file)
 
 

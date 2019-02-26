@@ -7,6 +7,7 @@ def main():
     room['id'] = room_num
     room['name'] = input('NAME: ')
     room["description"] = input('\nDescription:\n\t')
+    print("(ENTER ID NUMBER FOR DIRECTIONS)")
     room["north"] = input('Room North: ')
     room["south"] = input('Room South: ')
     room["east"] = input('Room East: ')
@@ -40,3 +41,4 @@ def conv_direct(room,direction):
     if room[direction] != None:
          room[direction] = int(room[direction])
 main()
+input()
