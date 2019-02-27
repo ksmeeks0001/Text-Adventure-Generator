@@ -193,8 +193,13 @@ class Game(cmd.Cmd):
             for npc in self.player.location.npc:
                 if arg == npc.name.lower():
                     npc.describe()
-                else:
-                    print("What is a "+arg+"?")
+                    return
+            for item in self.player.inventory.keys():
+                if arg == item:
+                    self.player.inventory[item].describe()
+                    return           
+            
+            print("What is a "+arg+"?")
 
     def do_quit(self, *args):
         """Exit the Game."""

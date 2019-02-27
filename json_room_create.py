@@ -15,6 +15,7 @@ def main():
     room['npc'] = []
     room['items'] = []
 
+    print(room['north'])
     conv_direct(room,'north')
     conv_direct(room,'south')
     conv_direct(room,'east')
@@ -38,7 +39,9 @@ def main():
         f.write(save)
 
 def conv_direct(room,direction):
-    if room[direction] != None:
+    if room[direction] != '':
          room[direction] = int(room[direction])
+    else:
+        room[direction] = None
 main()
 input()
