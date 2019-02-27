@@ -4,6 +4,7 @@ import rooms
 import os
 from items import*
 import pickle
+from shutil import rmtree
 
 def set_player_name():
         """gets and sets the players name."""
@@ -46,11 +47,12 @@ def load_player():
             f = file.read()
             player = json.loads(f)
             file.close()
-            player['name'] = set_player_name()   
-            for i in range(1,5):
-                room = 'room' + str(i) +'.json'
-                if os.path.isfile('visited/' + room):
-                    os.remove('visited/' + room)
+            player['name'] = set_player_name()
+            try:
+                rmtree('visited')
+               
+            except:
+                    pass
             done = True
             return player 
     
