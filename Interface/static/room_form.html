@@ -1,0 +1,200 @@
+<h1>Create a New Room</h1>
+
+<form> 
+	<tr><th><label for="id_id">ID:</label></th><td><input type="number" name="id" required id="id_id"></td></tr>
+<tr><th><label for="id_name">Name:</label></th><td><input type="text" name="name" required id="id_name"></td></tr>
+<tr><th><label for="id_description">Description:</label></th><td><input type="text" name="description" required id="id_description"></td></tr>
+<tr><th><label for="id_items">Items:</label></th><td><select name="items" required id="id_items" multiple>
+  <option value="None">None</option>
+
+  <option value="item">beer</option>
+
+  <option value="item">stinky boot</option>
+
+</select></td></tr>
+<tr><th><label for="id_npcs">NPCs:</label></th><td><select name="npcs" required id="id_npcs" multiple>
+  <option value="None">None</option>
+
+  <option value="character">inn keeper</option>
+
+  <option value="character">scary guy</option>
+
+  <option value="character">test</option>
+
+</select></td></tr>
+<tr><th><label for="id_north">North:</label></th><td><select name="north" id="id_north">
+  <option value="None">None</option>
+
+  <option value="room">room0</option>
+
+  <option value="room">room1</option>
+
+  <option value="room">room10</option>
+
+  <option value="room">room11</option>
+
+  <option value="room">room12</option>
+
+  <option value="room">room13</option>
+
+  <option value="room">room2</option>
+
+  <option value="room">room3</option>
+
+  <option value="room">room4</option>
+
+  <option value="room">room5</option>
+
+  <option value="room">room6</option>
+
+  <option value="room">room7</option>
+
+  <option value="room">room8</option>
+
+  <option value="room">room9</option>
+
+</select></td></tr>
+<tr><th><label for="id_south">South:</label></th><td><select name="south" id="id_south">
+  <option value="None">None</option>
+
+  <option value="room">room0</option>
+
+  <option value="room">room1</option>
+
+  <option value="room">room10</option>
+
+  <option value="room">room11</option>
+
+  <option value="room">room12</option>
+
+  <option value="room">room13</option>
+
+  <option value="room">room2</option>
+
+  <option value="room">room3</option>
+
+  <option value="room">room4</option>
+
+  <option value="room">room5</option>
+
+  <option value="room">room6</option>
+
+  <option value="room">room7</option>
+
+  <option value="room">room8</option>
+
+  <option value="room">room9</option>
+
+</select></td></tr>
+<tr><th><label for="id_west">West:</label></th><td><select name="west" id="id_west">
+  <option value="None">None</option>
+
+  <option value="room">room0</option>
+
+  <option value="room">room1</option>
+
+  <option value="room">room10</option>
+
+  <option value="room">room11</option>
+
+  <option value="room">room12</option>
+
+  <option value="room">room13</option>
+
+  <option value="room">room2</option>
+
+  <option value="room">room3</option>
+
+  <option value="room">room4</option>
+
+  <option value="room">room5</option>
+
+  <option value="room">room6</option>
+
+  <option value="room">room7</option>
+
+  <option value="room">room8</option>
+
+  <option value="room">room9</option>
+
+</select></td></tr>
+<tr><th><label for="id_east">East:</label></th><td><select name="east" id="id_east">
+  <option value="None">None</option>
+
+  <option value="room">room0</option>
+
+  <option value="room">room1</option>
+
+  <option value="room">room10</option>
+
+  <option value="room">room11</option>
+
+  <option value="room">room12</option>
+
+  <option value="room">room13</option>
+
+  <option value="room">room2</option>
+
+  <option value="room">room3</option>
+
+  <option value="room">room4</option>
+
+  <option value="room">room5</option>
+
+  <option value="room">room6</option>
+
+  <option value="room">room7</option>
+
+  <option value="room">room8</option>
+
+  <option value="room">room9</option>
+
+</select></td></tr>
+	<button id="submit">Create</button>
+</form>
+
+<script type="text/javascript" src="/eel.js"></script>
+<script type="text/javascript">
+	function get_selected_direction(direction){
+		for (var i of direction){
+			if (i.selected){
+				return i.text;
+				}
+			}
+		}
+	btn = document.getElementById('submit');
+	
+	btn.onclick = 
+	function create_room(){
+		let items = document.getElementById('id_items');
+		let items_list = [];
+		for(var i of items.options){
+			if ( i.selected){
+				items_list.push(i.text);
+				}
+			}
+			 
+		let npcs = document.getElementById('id_npcs');
+		let npcs_list = [];
+		for(var i of npcs.options){
+			if ( i.selected){
+				npcs_list.push(i.text);
+				}
+			}
+		
+		let data = {
+		id: document.getElementById('id_id').value,
+		name: document.getElementById('id_name').value,
+		description: document.getElementById('id_description').value,
+		items: items_list,
+		npcs: npcs_list,
+		north: get_selected_direction(document.getElementById('id_north')),
+		south: get_selected_direction(document.getElementById('id_south')),
+		east: get_selected_direction(document.getElementById('id_east')),
+		west: get_selected_direction(document.getElementById('id_west'))
+		
+		}
+		eel.create_room(data);
+	}
+	
+</script>

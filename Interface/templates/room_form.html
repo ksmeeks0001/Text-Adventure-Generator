@@ -1,0 +1,52 @@
+<h1>Create a New Room</h1>
+
+<form> 
+	{{ form }}
+	<button id="submit">Create</button>
+</form>
+
+<script type="text/javascript" src="/eel.js"></script>
+<script type="text/javascript">
+	function get_selected_direction(direction){
+		for (var i of direction){
+			if (i.selected){
+				return i.text;
+				}
+			}
+		}
+	btn = document.getElementById('submit');
+	
+	btn.onclick = 
+	function create_room(){
+		let items = document.getElementById('id_items');
+		let items_list = [];
+		for(var i of items.options){
+			if ( i.selected){
+				items_list.push(i.text);
+				}
+			}
+			 
+		let npcs = document.getElementById('id_npcs');
+		let npcs_list = [];
+		for(var i of npcs.options){
+			if ( i.selected){
+				npcs_list.push(i.text);
+				}
+			}
+		
+		let data = {
+		id: document.getElementById('id_id').value,
+		name: document.getElementById('id_name').value,
+		description: document.getElementById('id_description').value,
+		items: items_list,
+		npcs: npcs_list,
+		north: get_selected_direction(document.getElementById('id_north')),
+		south: get_selected_direction(document.getElementById('id_south')),
+		east: get_selected_direction(document.getElementById('id_east')),
+		west: get_selected_direction(document.getElementById('id_west'))
+		
+		}
+		eel.create_room(data);
+	}
+	
+</script>

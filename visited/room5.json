@@ -1,0 +1,1 @@
+{"id": 5, "name": "Road", "description": "This road should lead you to town, not all adventures travel by road... but I suppose it is safer.", "items": [], "north": 1, "east": 8, "south": 6, "west": 11, "npc": []}
