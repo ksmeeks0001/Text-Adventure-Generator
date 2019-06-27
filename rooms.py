@@ -6,25 +6,26 @@ import os
 
 
 
-def get_loc(id): #read location from file
+def get_loc(name): #read location from file
     """try to open saved room, if no saved open original."""
     try:
-        file = open('visited/room' + str(id) +'.json')
+        file = open('visited/' + name +'.json')
         f = file.read()
         room = json.loads(f)
         file.close()
         return room
     except FileNotFoundError:
-        file = open('rooms/room' + str(id) +'.json')
+        file = open('rooms/' + name +'.json')
         f = file.read()
         room = json.loads(f)
         file.close()
         return room
+    
 def save_room(room):
     save = json.dumps(room)
     if not os.path.isdir('visited'):
         os.makedirs('visited')
-    file = open('visited/room' + str(room['id']) +'.json','w')
+    file = open('visited/' + str(room['name']) +'.json','w')
     file.write(save)
     file.close()
 
@@ -35,7 +36,6 @@ class Location():
 
     def __init__(self, room):
         """Set the Dictionary to class attributes."""
-        self.id = room['id']
         self.name = room['name']
         self.description = room['description']
         self.items = room['items']
@@ -84,7 +84,7 @@ class Location():
 
 if __name__ == '__main__':
     #test
-    current_room = Location(get_loc(2))
+    current_room = Location(get_loc('room1'))
     print(current_room.name , current_room.description,
           current_room.south)
     print(current_room.npc)

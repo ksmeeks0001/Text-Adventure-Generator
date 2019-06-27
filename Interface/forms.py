@@ -1,3 +1,5 @@
+#all django forms for interface
+
 from django import forms
 import os
 
@@ -8,9 +10,8 @@ error = open('error.txt', 'w')
 sys.stderr = error
 
 class RoomForm(forms.Form):
-    id = forms.IntegerField(label="ID")
     name = forms.CharField(label="Name")
-    description = forms.CharField(label="Description")
+    description = forms.CharField(label="Description", widget = forms.Textarea)
     empty = ('None','None')
     
     ITEM_CHOICES = [empty]

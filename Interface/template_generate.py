@@ -1,17 +1,21 @@
+#functions for django setup and template rendering
 
 import django
 from django.conf import settings
 from django.template import Template, Context
+
     
 def setup_django():
     """Setup django settings and configurations"""
     
     TEMPLATES = [
     {'BACKEND': 'django.template.backends.django.DjangoTemplates'}
-    ]   
-    settings.configure(TEMPLATES=TEMPLATES)
+    ]
+    
+    settings.configure(TEMPLATES=TEMPLATES,USE_I18N = True)
     django.setup()
 
+    
 def refresh_template(template, context=dict(), form=''):
     """
         Generate html from template.

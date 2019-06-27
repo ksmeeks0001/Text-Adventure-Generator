@@ -210,7 +210,6 @@ class Game(cmd.Cmd):
                 self.player.location.npc2string()
                 save_room(self.player.location.__dict__)
                 save_player(self.player.__dict__,
-                            self.player.location.id,
                             list(self.player.inventory.keys()))                
                 print('Game has been saved!\nThanks for playing!')
                 return True

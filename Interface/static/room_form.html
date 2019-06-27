@@ -1,18 +1,19 @@
+<meta http-equiv="pragma" content="no-cache" />
 <h1>Create a New Room</h1>
 
 <form> 
-	<tr><th><label for="id_id">ID:</label></th><td><input type="number" name="id" required id="id_id"></td></tr>
-<tr><th><label for="id_name">Name:</label></th><td><input type="text" name="name" required id="id_name"></td></tr>
-<tr><th><label for="id_description">Description:</label></th><td><input type="text" name="description" required id="id_description"></td></tr>
+	<tr><th><label for="id_name">Name:</label></th><td><input type="text" name="name" value="Road" required id="id_name"></td></tr>
+<tr><th><label for="id_description">Description:</label></th><td><textarea name="description" cols="40" rows="10" required id="id_description">
+This road should lead you to town, not all adventures travel by road... but I suppose it is safer.</textarea></td></tr>
 <tr><th><label for="id_items">Items:</label></th><td><select name="items" required id="id_items" multiple>
-  <option value="None">None</option>
+  <option value="None" selected>None</option>
 
   <option value="item">beer</option>
 
   <option value="item">stinky boot</option>
 
 </select></td></tr>
-<tr><th><label for="id_npcs">NPCs:</label></th><td><select name="npcs" required id="id_npcs" multiple>
+<tr><th><label for="id_npcs">NPCs:</label></th><td><ul class="errorlist"><li>This field is required.</li></ul><select name="npcs" required id="id_npcs" multiple>
   <option value="None">None</option>
 
   <option value="character">inn keeper</option>
@@ -22,12 +23,14 @@
   <option value="character">test</option>
 
 </select></td></tr>
-<tr><th><label for="id_north">North:</label></th><td><select name="north" id="id_north">
+<tr><th><label for="id_north">North:</label></th><td><ul class="errorlist"><li>Select a valid choice. 1 is not one of the available choices.</li></ul><select name="north" id="id_north">
   <option value="None">None</option>
 
-  <option value="room">room0</option>
+  <option value="room">Blacksmith</option>
 
-  <option value="room">room1</option>
+  <option value="room">Inn</option>
+
+  <option value="room">Merchant</option>
 
   <option value="room">room10</option>
 
@@ -36,12 +39,6 @@
   <option value="room">room12</option>
 
   <option value="room">room13</option>
-
-  <option value="room">room2</option>
-
-  <option value="room">room3</option>
-
-  <option value="room">room4</option>
 
   <option value="room">room5</option>
 
@@ -53,13 +50,17 @@
 
   <option value="room">room9</option>
 
+  <option value="room">Village</option>
+
 </select></td></tr>
-<tr><th><label for="id_south">South:</label></th><td><select name="south" id="id_south">
+<tr><th><label for="id_south">South:</label></th><td><ul class="errorlist"><li>Select a valid choice. 6 is not one of the available choices.</li></ul><select name="south" id="id_south">
   <option value="None">None</option>
 
-  <option value="room">room0</option>
+  <option value="room">Blacksmith</option>
 
-  <option value="room">room1</option>
+  <option value="room">Inn</option>
+
+  <option value="room">Merchant</option>
 
   <option value="room">room10</option>
 
@@ -68,12 +69,6 @@
   <option value="room">room12</option>
 
   <option value="room">room13</option>
-
-  <option value="room">room2</option>
-
-  <option value="room">room3</option>
-
-  <option value="room">room4</option>
 
   <option value="room">room5</option>
 
@@ -85,13 +80,17 @@
 
   <option value="room">room9</option>
 
+  <option value="room">Village</option>
+
 </select></td></tr>
-<tr><th><label for="id_west">West:</label></th><td><select name="west" id="id_west">
+<tr><th><label for="id_west">West:</label></th><td><ul class="errorlist"><li>Select a valid choice. 11 is not one of the available choices.</li></ul><select name="west" id="id_west">
   <option value="None">None</option>
 
-  <option value="room">room0</option>
+  <option value="room">Blacksmith</option>
 
-  <option value="room">room1</option>
+  <option value="room">Inn</option>
+
+  <option value="room">Merchant</option>
 
   <option value="room">room10</option>
 
@@ -100,12 +99,6 @@
   <option value="room">room12</option>
 
   <option value="room">room13</option>
-
-  <option value="room">room2</option>
-
-  <option value="room">room3</option>
-
-  <option value="room">room4</option>
 
   <option value="room">room5</option>
 
@@ -117,13 +110,17 @@
 
   <option value="room">room9</option>
 
+  <option value="room">Village</option>
+
 </select></td></tr>
-<tr><th><label for="id_east">East:</label></th><td><select name="east" id="id_east">
+<tr><th><label for="id_east">East:</label></th><td><ul class="errorlist"><li>Select a valid choice. 8 is not one of the available choices.</li></ul><select name="east" id="id_east">
   <option value="None">None</option>
 
-  <option value="room">room0</option>
+  <option value="room">Blacksmith</option>
 
-  <option value="room">room1</option>
+  <option value="room">Inn</option>
+
+  <option value="room">Merchant</option>
 
   <option value="room">room10</option>
 
@@ -132,12 +129,6 @@
   <option value="room">room12</option>
 
   <option value="room">room13</option>
-
-  <option value="room">room2</option>
-
-  <option value="room">room3</option>
-
-  <option value="room">room4</option>
 
   <option value="room">room5</option>
 
@@ -149,8 +140,10 @@
 
   <option value="room">room9</option>
 
+  <option value="room">Village</option>
+
 </select></td></tr>
-	<button id="submit">Create</button>
+	<button type='submit' id="submit">Create</button>
 </form>
 
 <script type="text/javascript" src="/eel.js"></script>
@@ -162,7 +155,7 @@
 				}
 			}
 		}
-	btn = document.getElementById('submit');
+	let btn = document.getElementById('submit');
 	
 	btn.onclick = 
 	function create_room(){
@@ -183,18 +176,46 @@
 			}
 		
 		let data = {
-		id: document.getElementById('id_id').value,
 		name: document.getElementById('id_name').value,
 		description: document.getElementById('id_description').value,
 		items: items_list,
-		npcs: npcs_list,
+		npc: npcs_list,
 		north: get_selected_direction(document.getElementById('id_north')),
 		south: get_selected_direction(document.getElementById('id_south')),
 		east: get_selected_direction(document.getElementById('id_east')),
 		west: get_selected_direction(document.getElementById('id_west'))
 		
 		}
+		if (data.name === "" || data.description === ""){
+			return;
+			}
 		eel.create_room(data);
 	}
+	let items = document.getElementById('id_items');
+	let item_options = items.options;
+	let item_prefill = [
 	
+		'None',
+	
+	];
+	for (var choice of item_options){
+		for (var prefill of item_prefill){
+			if (choice.innerText === prefill)
+				choice.selected = true;
+				}
+			}
+	let npcs = document.getElementById('id_npcs');
+	let npc_options = npcs.options;
+	let npc_prefill = [
+	
+		'None',
+	
+	];
+	for (var choice of npc_options){
+		for (var prefill of npc_prefill){
+			if (choice.innerText === prefill)
+				choice.selected = true;
+				}
+			}
+			
 </script>

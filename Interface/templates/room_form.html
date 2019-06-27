@@ -1,8 +1,9 @@
+<meta http-equiv="pragma" content="no-cache" />
 <h1>Create a New Room</h1>
 
 <form> 
 	{{ form }}
-	<button id="submit">Create</button>
+	<button type='submit' id="submit">Create</button>
 </form>
 
 <script type="text/javascript" src="/eel.js"></script>
@@ -14,7 +15,7 @@
 				}
 			}
 		}
-	btn = document.getElementById('submit');
+	let btn = document.getElementById('submit');
 	
 	btn.onclick = 
 	function create_room(){
@@ -35,18 +36,46 @@
 			}
 		
 		let data = {
-		id: document.getElementById('id_id').value,
 		name: document.getElementById('id_name').value,
 		description: document.getElementById('id_description').value,
 		items: items_list,
-		npcs: npcs_list,
+		npc: npcs_list,
 		north: get_selected_direction(document.getElementById('id_north')),
 		south: get_selected_direction(document.getElementById('id_south')),
 		east: get_selected_direction(document.getElementById('id_east')),
 		west: get_selected_direction(document.getElementById('id_west'))
 		
 		}
+		if (data.name === "" || data.description === ""){
+			return;
+			}
 		eel.create_room(data);
 	}
-	
+	let items = document.getElementById('id_items');
+	let item_options = items.options;
+	let item_prefill = [
+	{% for item in items %}
+		'{{ item }}',
+	{% endfor %}
+	];
+	for (var choice of item_options){
+		for (var prefill of item_prefill){
+			if (choice.innerText === prefill)
+				choice.selected = true;
+				}
+			}
+	let npcs = document.getElementById('id_npcs');
+	let npc_options = npcs.options;
+	let npc_prefill = [
+	{% for n in npc %}
+		'{{ n }}',
+	{% endfor %}
+	];
+	for (var choice of npc_options){
+		for (var prefill of npc_prefill){
+			if (choice.innerText === prefill)
+				choice.selected = true;
+				}
+			}
+			
 </script>

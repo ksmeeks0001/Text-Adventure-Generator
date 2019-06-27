@@ -4,13 +4,14 @@ class Item():
     """Item Base Representation."""
 
     def __init__(self,name,description, reusable):
-        self.name = name.title()
+        self.name = name
         self.description = description
         self.reusable = reusable
         
     def describe(self):
         """Returns Description for Game."""
-        print(self.name+": "+self.description)
+        print(self.name.title()+": "+self.description)
+
 
 class HealthItem(Item):
     """Item that Affects player health."""
@@ -20,7 +21,7 @@ class HealthItem(Item):
         self.effect = effect
 
     def use(self, player):
-        player.health += str(self.effect)
+        player.health += int(self.effect)
         print("Health Affected: "+str(self.effect))
         
 

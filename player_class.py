@@ -57,8 +57,8 @@ def load_player():
             return player 
     
 
-def save_player(player, id, itemkeys):
-    player['location'] = id
+def save_player(player, itemkeys):
+    player['location'] = player['location'].name
     player['inventory'] = itemkeys
     save = json.dumps(player)
     file = open('players/player.json','w')

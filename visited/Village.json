@@ -1,0 +1,1 @@
+{"name": "Village", "description": "An Inn is to your north. A merchant to the east and a blacksmith shop to your west.", "items": [], "north": "Inn", "east": "Merchant", "south": "Road", "west": "Blacksmith", "npc": []}

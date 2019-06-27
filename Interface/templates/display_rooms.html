@@ -1,0 +1,30 @@
+<p><a onclick='new_room()'>create new room</a></p>
+<h1>LOCATIONS</h1>      
+
+<ul>
+{% for room in rooms %}
+	
+	<li><a class='room_link'>{{ room }}</a></li>
+	
+{% endfor %}
+</ul>
+
+<script type='text/javascript' src='/eel.js'></script>
+<script type='text/javascript'>
+	function new_room(){
+		eel.room_create_view();
+		window.location = 'room_form.html';
+		}
+	function clicked(room){
+		eel.fill_room_form(room.innerHTML);
+		
+	}
+	let rooms = document.getElementsByClassName('room_link');
+	for (var room of rooms){
+		room.onclick = function() {
+			clicked(this);
+			window.location = 'room_form.html';
+			}	
+	}
+	
+</script>

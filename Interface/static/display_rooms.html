@@ -1,0 +1,78 @@
+<p><a onclick='new_room()'>create new room</a></p>
+<h1>LOCATIONS</h1>      
+
+<ul>
+
+	
+	<li><a class='room_link'>Blacksmith</a></li>
+	
+
+	
+	<li><a class='room_link'>City Entrance</a></li>
+	
+
+	
+	<li><a class='room_link'>Forest</a></li>
+	
+
+	
+	<li><a class='room_link'>Forest_2</a></li>
+	
+
+	
+	<li><a class='room_link'>Forest_3</a></li>
+	
+
+	
+	<li><a class='room_link'>Inn</a></li>
+	
+
+	
+	<li><a class='room_link'>Merchant</a></li>
+	
+
+	
+	<li><a class='room_link'>River Bank</a></li>
+	
+
+	
+	<li><a class='room_link'>River Bank_2</a></li>
+	
+
+	
+	<li><a class='room_link'>River Bank_3</a></li>
+	
+
+	
+	<li><a class='room_link'>Road</a></li>
+	
+
+	
+	<li><a class='room_link'>Road_2</a></li>
+	
+
+	
+	<li><a class='room_link'>Village</a></li>
+	
+
+</ul>
+
+<script type='text/javascript' src='/eel.js'></script>
+<script type='text/javascript'>
+	function new_room(){
+		eel.room_create_view();
+		window.location = 'room_form.html';
+		}
+	function clicked(room){
+		eel.fill_room_form(room.innerHTML);
+		
+	}
+	let rooms = document.getElementsByClassName('room_link');
+	for (var room of rooms){
+		room.onclick = function() {
+			clicked(this);
+			window.location = 'room_form.html';
+			}	
+	}
+	
+</script>
